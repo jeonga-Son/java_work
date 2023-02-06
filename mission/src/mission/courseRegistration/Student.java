@@ -17,7 +17,24 @@ public class Student {
 	
 	public void register(Course course) {
 		courses.add(course);
+		course.addStudents(this); // 여기서 this가 뜻하는 것?
 	}
+	
+	public void dropCourse(Course course) {
+		if (courses.contains(course)) {
+			courses.remove(course);
+			course.removeStudent(this);
+		}
+	}
+
+	// 왜 이건 안되는지? => eqauls는 주소값을 가지고 비교하는거기 때문에 안됨.
+//	public void dropCourse(Course course) {
+//		for (Course c : courses) {
+//			if (c.equals(course)) {
+//				courses.remove(course);
+//			}
+//		}
+//	}
 	
 	public void showStudent() {
 		System.out.println("학생 이름 : " + name);
