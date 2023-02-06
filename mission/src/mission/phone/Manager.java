@@ -20,21 +20,77 @@ public class Manager {
 		
 		System.out.print("생년일을 입력해주요.(ex.990201) : ");
 		String birth = sc.nextLine();
+				
+		System.out.println("1.일반  2.기업  3.학교");
+		System.out.print("메뉴 : ");
+		String menu = sc.nextLine();
 		
-		arr[cnt++] = new PhoneInfo(name, phoneNo, birth);
+		switch(menu) {
+		case "1":
+			arr[cnt++] = new PhoneInfo(name, phoneNo, birth);
+			
+			break;
+			
+		case "2":
+			System.out.print("부서 : ");
+			String dept = sc.nextLine();
+			
+			System.out.print("직책 : ");
+			String position = sc.nextLine();
+			
+			arr[cnt++] = new Company(name, phoneNo, birth, dept, position);
+			break;
+			
+		case "3":
+			System.out.print("전공 : ");
+			String major = sc.nextLine();
+			
+			System.out.print("학번 : ");
+			String year = sc.nextLine();
+			
+			arr[cnt++] = new Universe(name, phoneNo, birth, major, year);
+			break;
+		}
+		
 		System.out.println("저장되었습니다.");
 	}
 	
 	public void showListPhoneInfo() {
-		System.out.println("전화번호 목록입니다.");
-		System.out.println("================");
+		System.out.println("1.전체  2.기업  3.학교");
+		System.out.print("메뉴 : ");
+		String menu = sc.nextLine();
 		
-		if (cnt == 0) {
-			System.out.println("전화번호부가 비어있습니다.");
-		}
-		
-		for(int i = 0; i < cnt; i++) {
-			arr[i].show();
+		switch(menu) {
+		case "1":
+			System.out.println("전체 회원의 정보입니다.");
+			
+			for(int i = 0; i < cnt; i++) {
+				arr[i].show();
+			}
+			
+			break;
+			
+		case "2":
+			System.out.println("기업 회원의 정보입니다.");
+			
+			for (int i = 0; i < cnt; i++) {
+				if (arr[i] instanceof Company) {
+					arr[i].show();
+				}
+			}
+			
+			break;
+			
+		case "3":
+			System.out.println("학교 회원의 정보입니다.");
+			
+			for (int i = 0; i < cnt; i++) {
+				if (arr[i] instanceof Universe) {
+					arr[i].show();
+				}
+			}
+			
+			break;
 		}
 	}
 	
